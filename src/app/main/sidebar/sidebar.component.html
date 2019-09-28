@@ -1,0 +1,21 @@
+<div class="players-content">
+  <div class="palyers-head">
+    <p class="palyers-title">Пациенты</p>
+    <p class="palyers-sort"><i class="fas fa-sort-alpha-down"></i></p>
+  </div>
+  <div class="players-row-container">
+    <div class="players-row">
+      <div class="player-item"
+           *ngFor="let patient of patients"
+           [routerLink]="['/main/patient', patient.id, 'info']"
+      >
+
+        <div class="player-item-photo" [ngStyle]="{'background-image': 'url(http://localhost:3012/uploads/'+ patient.photo +')'}">
+        </div>
+        <div class="player-item-info">
+          {{ patient.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

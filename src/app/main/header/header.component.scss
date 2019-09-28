@@ -1,0 +1,84 @@
+
+.system-header {
+  background-color: white;
+  width: 100%;
+  padding: 10px 40px;
+  display: flex;
+  height: 50px;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.1);
+  justify-content: flex-end;
+  font-size: 14px;
+  position: relative;
+  align-content: center;
+}
+
+.header-main{
+  width: 79%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+.header-search{
+  width: 70%;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #e0e0e0;
+  padding-left: 20px;
+}
+.header-info{
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+.add-player-btn{
+  background-image: linear-gradient(to right, #e3592f, #ffb473);
+  color: white;
+  padding: 7px 18px;
+  border: none;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  align-items: center;
+  font-weight: bold;
+  i{
+    font-size: 10px;
+    margin-right: 10px;
+  }
+}
+
+.header-user-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #aeaeae;
+
+  .fa-user{
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  .fa-caret-down{
+    font-size: 10px;
+    margin-left: 5px;
+  }
+}
+.header-user-btn.open {
+  .header-user-nav {
+    display: flex;
+  }
+}
+
+.header-user-nav {
+  display: flex;
+  padding: 20px 70px;
+  background-color: white;
+  box-shadow: 1px 1px 35px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: -60px;
+  right: 0;
+  z-index: 100;
+  cursor: pointer;
+}
+.players-nav-icon{
+  display: none;
+}

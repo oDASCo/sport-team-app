@@ -1,0 +1,9 @@
+{
+  "/backend/api": {
+    "target": "http://localhost:3012/",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/backend/api": "/"
+    }
+  }
+}

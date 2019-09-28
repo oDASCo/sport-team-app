@@ -1,0 +1,55 @@
+$font: 'Ubuntu', sans-serif;
+
+
+body {
+  margin: 0;
+  font-family: $font;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f5f7fa;
+  font-size: 14px;
+}
+
+.app-wrapper {
+  background: #f5f7fa;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  word-break: break-word;
+}
+
+input, button {
+  outline: none;
+}
+
+*::-webkit-scrollbar {
+  width: 3px;
+  border-radius: 1px;
+}
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px transparent;
+  border-radius: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #f6f6f6;
+  outline: 1px solid #f6f6f6;
+  border-radius: 5px;
+}
+

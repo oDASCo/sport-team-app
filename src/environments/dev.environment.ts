@@ -1,4 +1,4 @@
-import {AppModel} from "../app/app.model";
+import {AppModel} from '../app/app.model';
 
 export const environment: AppModel = {
   api: {
@@ -6,5 +6,5 @@ export const environment: AppModel = {
       url: 'patient'
     }
   },
-  production: true
+  production: false
 };

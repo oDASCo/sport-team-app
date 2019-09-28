@@ -1,0 +1,53 @@
+<div class="main">
+  <app-sidebar #OnPlayerAdd ></app-sidebar>
+  <div class="main-content">
+    <div class="add-player-card">
+      <form class="add-player-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="add-player-item">
+          <input class="add-player-input"
+                 placeholder="Имя"
+                 type="text"
+                 formControlName="firstName"
+                 autocomplete="off"
+                 id="firstName"
+          >
+        </div>
+        <div class="add-player-item">
+          <input class="add-player-input"
+                 placeholder="Фамилия"
+                 type="text"
+                 formControlName="lastName"
+                 autocomplete="off"
+                 id="lastName">
+        </div>
+        <div class="add-player-item">
+          <div class="upload-btn-wrapper">
+            <button class="upload-btn">Загрузить фото <i class="far fa-images"></i></button>
+            <div>
+              <input accept="image/png, image/jpeg, image/jpg"
+                     type="file" (change)="onFileChange($event)" #fileInput/>
+              <img id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image"/>
+            </div>
+
+          </div>
+        </div>
+        <div class="add-player-item">
+          <button type="submit" class="add-player-btn" [disabled]="formGroup.invalid" (click)="addLoader()">Добавить
+            игрока
+          </button>
+          <span
+            class="form-help-text"
+            *ngIf="(formGroup.get('firstName').invalid && formGroup.get('firstName').touched) || (formGroup.get('lastName').invalid && formGroup.get('lastName').touched)"
+          >
+       Пожалуйста, заполните все поля
+     </span>
+        </div>
+
+        <span *ngIf="isPlayerAdded" class="form-result">Игрок добавлен</span>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,22 @@
+<header class="system-header">
+  <div class="players-nav-icon add-player-btn" >
+    <i class="fas fa-user-friends"></i>
+  </div>
+  <div class="header-main">
+    <div class="header-search">
+    </div>
+    <div class="header-info">
+
+      <button class="add-player-btn" [routerLink]="['add-patient']"><i class="fas fa-plus"></i> Добавить игрока
+      </button>
+      <div class="header-user-btn dropdown"><i class="fas fa-user dropdown"></i> User <i
+        class="fas fa-caret-down dropdown"></i>
+        <div class="header-user-nav" *ngIf="false">
+          <span class="header-user-nav-item" [routerLink]="['/login']">Log out</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+

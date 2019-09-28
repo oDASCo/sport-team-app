@@ -1,0 +1,75 @@
+
+.player-card {
+  width: 100%;
+  padding: 20px;
+  .player-card-header {
+    display: flex;
+    align-items: center;
+    margin: 15px 20px;
+  }
+
+  .player-card-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-image: url("/../../../assets/img/player.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .player-card-title {
+    margin-left: 20px;
+    font-size: 18px;
+  }
+
+  .player-card-tabs {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #e5e8ed;
+    margin-bottom: 20px;
+  }
+
+  .player-card-tab {
+    padding: 15px 30px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    color: #4a6fa2;
+  }
+
+  .player-card-tab.active {
+    border-bottom: 2px solid #4a6fa2 ;
+    margin-bottom: -1px;
+  }
+
+  .player-tab-content {
+    max-height: calc(100vh - 230px);
+    overflow-y: scroll;
+    width: 94%;
+    margin: 0 auto;
+    min-height: 120px;
+  }
+}
+
+.edit-icon {
+  color: #ffffff;
+  margin-left: 15px;
+  font-size: 10px;
+  background-color: rgba(119, 178, 217, 0.89);
+  cursor: pointer;
+  padding: 10px 10px 11px 11px;
+  border-radius: 5px;
+  box-shadow: 5px 4px 7px rgba(0, 0, 0, 0.1);
+}
+
+.delete-icon {
+  color: #ffffff;
+  margin-left: 15px;
+  font-size: 10px;
+  background-color: #de897e;
+  cursor: pointer;
+  padding: 10px 10px 11px 11px;
+  border-radius: 5px;
+  box-shadow: 5px 4px 7px rgba(0, 0, 0, 0.1);
+}
