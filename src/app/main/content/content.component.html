@@ -7,7 +7,15 @@
           <div class="player-card-photo"
                [ngStyle]="{'background-image': 'url(http://localhost:3012/uploads/'+ patient.photo +')'}">
           </div>
-          <p class="player-card-title">{{patient.name}}</p>
+          <p class="player-card-title">{{patient?.name}}</p>
+          <i class="fas fa-edit edit-icon" title="editMainInfo"
+             *ngIf="editModeService.editMode"
+             (click)="modalService.modalType = 'editMainInfo'; modalService.patientId = patient.id"
+          ></i>
+          <i class="fas fa-trash delete-icon" title="deletePlayer"
+             *ngIf="editModeService.editMode"
+             (click)="modalService.modalType = 'deletePatient'"
+          ></i>
         </div>
         <div class="player-card-content">
           <div class="player-card-tabs">

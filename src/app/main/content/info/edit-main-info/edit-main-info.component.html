@@ -1,0 +1,42 @@
+<p *ngIf="!isPlayerEdited" class="edit-main-info-title">Редактируем ирока номер {{playerId}}</p>
+
+<div>
+  <form *ngIf="!isPlayerEdited" class="add-player-form" [formGroup]='form' (ngSubmit)="onSubmit()">
+    <div class="add-player-item">
+      <input class="add-player-input"
+             placeholder="Имя"
+             type="text"
+             formControlName="newFirstName"
+             autocomplete="off"
+             id="firstName"
+             value="{{firstName}}"
+      >
+    </div>
+    <div class="add-player-item">
+      <input class="add-player-input"
+             placeholder="Фамилия"
+             type="text"
+             formControlName="newLastName"
+             autocomplete="off"
+             id="lastName"
+             value="{{lastName}}"
+      >
+    </div>
+    <div class="add-player-item">
+      <div class="upload-btn-wrapper">
+        <button class="upload-btn">Загрузить фото <i class="far fa-images"></i></button>
+        <div>
+          <input accept="image/png, image/jpeg, image/jpg"
+                 type="file" (change)="onFileChange($event)" #editFileInput  />
+          <img id="blah" [src]="imageSrc || 'http://localhost:3012/uploads/'+ photo" alt="your image" />
+        </div>
+
+      </div>
+    </div>
+    <div class="add-player-item">
+      <button type="submit" class="add-player-btn" [disabled]="form.invalid" (click)="addLoader()">Сохранить</button>
+    </div>
+
+  </form>
+  <span *ngIf="isPlayerEdited" class="form-result">Игрок {{firstName+' '+lastName}} изменен</span>
+</div>

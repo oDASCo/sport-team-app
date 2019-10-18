@@ -9,54 +9,42 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
   templateUrl: './add-patient.component.html',
   styleUrls: ['./add-patient.component.scss']
 })
-export class AddPatientComponent implements OnInit {
+export class AddPatientComponent {
 
+  @ViewChild('fileInput') fileInput: any;
   @ViewChild('OnPlayerAdd')
   private OnPlayerAdd: SidebarComponent;
-
-  selectedFile;
-  imageSrc;
-  formGroup = this.fb.group({
+  public selectedFile;
+  public imageSrc;
+  public formGroup = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required]
   });
-  isPlayerAdded = false;
-  isLoaded = true;
+  public isPlayerAdded = false;
+  public isLoaded = true;
 
-  @ViewChild('fileInput') fileInput: any;
-
-
-  constructor(private patientService: PatientService,
-              private fb: FormBuilder) {
+  constructor(
+    private patientService: PatientService,
+    private fb: FormBuilder) {
   }
 
-  ngOnInit() {
-
-  }
-
-  addLoader() {
+  public addLoader() {
     this.isLoaded = false;
   }
 
-  onFileChange(event) {
+  public onFileChange(event) {
     let nativeElement: HTMLInputElement = this.fileInput.nativeElement;
-
     this.selectedFile = nativeElement.files;
-
     if (event.target.files && event.target.files[0]) {
       const percentDone = Math.round(100 * event.loaded / event.total);
-
       const file = event.target.files[0];
-
       const reader = new FileReader();
       reader.onload = e => this.imageSrc = reader.result;
-
       reader.readAsDataURL(file);
     }
   }
 
-  onSubmit() {
-
+  public onSubmit() {
     const {firstName, lastName} = this.formGroup.value;
     let input = new FormData();
     if (this.selectedFile === undefined) {
@@ -74,5 +62,4 @@ export class AddPatientComponent implements OnInit {
       });
     }
   }
-
 }

@@ -11,7 +11,9 @@ export class SidebarComponent implements OnInit {
 
   public patients = [];
 
-  constructor(private patientService: PatientService) {
+  constructor(
+    private patientService: PatientService
+  ) {
   }
 
   ngOnInit() {

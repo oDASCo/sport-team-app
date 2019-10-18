@@ -10,7 +10,8 @@
            [routerLink]="['/main/patient', patient.id, 'info']"
       >
 
-        <div class="player-item-photo" [ngStyle]="{'background-image': 'url(http://localhost:3012/uploads/'+ patient.photo +')'}">
+        <div class="player-item-photo"
+             [ngStyle]="{'background-image': 'url(http://localhost:3012/uploads/'+ patient.photo +')'}">
         </div>
         <div class="player-item-info">
           {{ patient.name}}

@@ -3,4 +3,6 @@ export interface IPatient {
   photo: string;
   id: number;
 }
-export interface IPatients extends Array<IPatient>{}
+
+export interface IPatients extends Array<IPatient> {
+}

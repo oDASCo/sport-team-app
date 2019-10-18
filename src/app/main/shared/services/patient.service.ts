@@ -23,4 +23,31 @@ export class PatientService {
     return this.http.post(`backend/api/${environment.api.patient.url}`, patient,
       {responseType: 'json'});
   }
+
+  public deletePatientById(id): Observable<any> {
+    return this.http.delete<HttpResponse<any>>
+    (`backend/api/${environment.api.patient.url}/${id}`);
+  }
+
+  public getGeneralInfo(patientId): Observable<any> {
+    return this.http.get<HttpResponse<any>>
+    (`backend/api/${environment.api.generalInfo.url}/${patientId}`);
+  }
+
+  public getFluorograpthy(generalInfoId): Observable<any> {
+    return this.http.get<HttpResponse<any>>
+    (`backend/api/${environment.api.fluorography.url}/${generalInfoId}`);
+  }
+  public getVaccination(generalInfoId): Observable<any> {
+    return this.http.get<HttpResponse<any>>
+    (`backend/api/${environment.api.vaccinationstatus.url}/${generalInfoId}`);
+  }
+  public getSurgery(generalInfoId): Observable<any> {
+    return this.http.get<HttpResponse<any>>
+    (`backend/api/${environment.api.surgicalintervention.url}/${generalInfoId}`);
+  }
+
+  public editPatientById(patient): Observable<any> {
+    return this.http.put(`backend/api/${environment.api.patient.url}`, patient);
+  }
 }

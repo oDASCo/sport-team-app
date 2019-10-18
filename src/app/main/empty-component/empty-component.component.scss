@@ -1,0 +1,19 @@
+.add-player-card{
+  width: 76%;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 40px 80px;
+  background-color: white;
+  justify-self: center;
+  align-self: center;
+  margin: 50px 13%;
+}
+.empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  padding: 20px 0;
+  color: #c9c9c9;
+  text-transform: uppercase;
+}

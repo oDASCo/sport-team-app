@@ -13,6 +13,12 @@ import {AddPatientComponent} from "./add-patient/add-patient.component";
 import {AppRoutingModule} from "../app-routing.module";
 import {PatientService} from "./shared/services/patient.service";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {EditModeService} from "./shared/services/editMode.service";
+import {ModalComponent} from './modal/modal.component';
+import {ModalService} from "./shared/services/modal.service";
+import { EmptyComponentComponent } from './empty-component/empty-component.component';
+import {SharedModule} from "../shared/shared.module";
+import { EditMainInfoComponent } from './content/info/edit-main-info/edit-main-info.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +30,22 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     TestsComponent,
     InfoComponent,
     IllnessesComponent,
-    AddPatientComponent
+    AddPatientComponent,
+    ModalComponent,
+    EmptyComponentComponent,
+    EditMainInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
-  providers: [PatientService]
+  providers: [
+    PatientService,
+    EditModeService,
+    ModalService]
 })
 export class MainModule {
 }

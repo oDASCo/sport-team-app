@@ -1,3 +1,246 @@
-<p>
-  info works!
-</p>
+<app-modal [playerId]="playerId" [modalType]="modalService.modalType"></app-modal>
+<form class="player-info-list" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div class="edit-controls">
+    <button class="player-card-edit edit"
+            *ngIf="!editModeService.editMode"
+            (click)="onEditMode()"
+    >
+      Редактирование
+      <i class="fas fa-edit edit-icon"></i>
+    </button>
+    <button class="player-card-edit close"
+            *ngIf="editModeService.editMode"
+            (click)="offEditMode()"
+    >
+      Отмена
+    </button>
+    <button class="player-card-edit save"
+            *ngIf="editModeService.editMode"
+            type="submit"
+            (click)="offEditMode()"
+    >
+      Сохранить
+    </button>
+  </div>
+
+  <div class="player-info-item">
+    <div class="player-info-item-main">
+      <i class="fas fa-calendar-alt player-info-icon"></i>
+      Дата рождения/полных лет: <strong>{{playerGeneralInfo?.birthday | date: 'dd.MM.yyyy'}}</strong>
+    </div>
+    <div class="player-info-item-edit" *ngIf="editModeService.editMode">
+      <input class="player-info-item-edit-input"
+             value="{{playerGeneralInfo?.birthday | date: 'yyyy-MM-dd'}}"
+             formControlName="date"
+             autocomplete="off"
+             id="date"
+      />
+
+    </div>
+  </div>
+  <div class="player-info-item">
+    <div class="player-info-item-main">
+      <i class="fas fa-weight player-info-icon" ></i> Вес:
+      <strong>{{playerGeneralInfo?.weight}} кг</strong>
+    </div>
+    <div class="player-info-item-edit" *ngIf="editModeService.editMode">
+      <input class="player-info-item-edit-input" type="number" value="{{playerGeneralInfo?.weight}}"
+             formControlName="weight"
+             autocomplete="off"
+             id="weight"
+      />
+    </div>
+  </div>
+  <div class="player-info-item">
+    <div class="player-info-item-main">
+      <i class="fas fa-ruler-vertical player-info-icon" ></i> Рост:
+      <strong>{{playerGeneralInfo?.height}} см</strong>
+    </div>
+    <div class="player-info-item-edit" *ngIf="editModeService.editMode">
+      <input class="player-info-item-edit-input" type="number" value="{{playerGeneralInfo?.height}}"
+             formControlName="height"
+             autocomplete="off"
+             id="height"
+      />
+    </div>
+
+  </div>
+  <div class="player-info-item">
+    <div class="player-info-item-main">
+      <i class="fas fa-tachometer-alt player-info-icon" ></i> АД:
+      <strong>{{playerGeneralInfo?.arterialPressure}}</strong>
+    </div>
+    <div class="player-info-item-edit" *ngIf="editModeService.editMode">
+      <input class="player-info-item-edit-input" type="number" value="{{playerGeneralInfo?.arterialPressure}}"
+             formControlName="arterialPressure"
+             autocomplete="off"
+             id="arterialPressure"
+      />
+    </div>
+
+  </div>
+  <div class="player-info-item">
+    <div class="player-info-item-main">
+      <i class="fas fa-tint player-info-icon" ></i> Группа крови/резус фактор:
+      <strong> {{playerGeneralInfo?.bloodType}}</strong>
+    </div>
+    <div class="player-info-item-edit" *ngIf="editModeService.editMode">
+      <input class="player-info-item-edit-input" value="{{playerGeneralInfo?.bloodType}}"
+             formControlName="bloodType"
+             autocomplete="off"
+             id="bloodType"
+      />
+    </div>
+
+  </div>
+
+  <div class="player-info-item" ftdropdown>
+    <div class="player-info-item-main dropdown" >
+      <i class="fas fa-sticky-note player-info-icon dropdown"></i> Флюрография
+      <i
+        class="fas fa-caret-down player-info-item-icon open dropdown"></i>
+      <i
+        class="fas fa-caret-down player-info-item-icon close"></i>
+
+    </div>
+
+    <div class="player-info-item-open-content">
+      <div class="player-info-table" *ngFor="let flurography of flurographiesList">
+        <div class="player-info-table-cell small">
+          {{flurography.procedureDate | date: 'dd.MM.yyyy'}}
+        </div>
+        <div class="player-info-table-cell big">
+          {{flurography.info}}
+        </div>
+        <i class="fas fa-trash-alt player-info-edit-icon delete" [id]="flurography.id"
+           *ngIf="editModeService.editMode"
+           (click)="deleteFlurography($event)"
+        ></i>
+      </div>
+
+      <form class="player-info-table edit-mode" *ngIf="editModeService.editMode" [formGroup]="flurographyForm" (ngSubmit)="onFlurographySubmit()">
+        <div class="player-info-table-edit small">
+          <input
+            formControlName="flurographyDate"
+            id="flurographyDate"
+            autocomplete="off"
+            min="1920-03-10T22:09:44.000Z"
+            max="2030-03-10T22:09:44.000Z"
+          />
+        </div>
+        <div class="player-info-table-edit big">
+          <input
+            formControlName="flurographyInfo"
+            id="flurographyInfo"
+            autocomplete="off"
+            placeholder="Заключение"
+          />
+        </div>
+        <button type="submit" class="fas fa-check player-info-edit-icon"></button>
+      </form>
+    </div>
+  </div>
+  <div class="player-info-item" ftdropdown>
+    <div class="player-info-item-main dropdown" >
+      <i class="fas fa-syringe player-info-icon dropdown" ></i> Прививочный статус
+      <i
+        class="fas fa-caret-down player-info-item-icon open dropdown"></i>
+      <i
+        class="fas fa-caret-down player-info-item-icon close"></i>
+    </div>
+
+    <div class="player-info-item-open-content" >
+      <div class="player-info-table" *ngFor="let vaccination of vaccinationsList">
+        <div class="player-info-table-cell small">
+          {{vaccination.procedureDate | date: 'dd.MM.yyyy'}}
+        </div>
+        <div class="player-info-table-cell big">
+          {{vaccination.info}}
+        </div>
+        <i class="fas fa-trash-alt player-info-edit-icon delete"
+           *ngIf="editModeService.editMode"
+           (click)="deleteVaccination($event)"
+           [id]="vaccination.id"
+        ></i>
+      </div>
+      <form class="player-info-table edit-mode" *ngIf="editModeService.editMode" [formGroup]="vaccinationForm"
+            (ngSubmit)="onVaccinationSubmit()">
+        <div class="player-info-table-edit small">
+          <input
+            formControlName="vaccinationDate"
+            id="vaccinationDate"
+            autocomplete="off"
+            min="1920-03-10T22:09:44.000Z"
+            max="2030-03-10T22:09:44.000Z"
+          />
+        </div>
+        <div class="player-info-table-edit big">
+          <input
+            formControlName="vaccinationInfo"
+            id="vaccinationInfo"
+            autocomplete="off"
+            placeholder="Прививочный статус"
+          />
+        </div>
+        <button type="submit" class="fas fa-check player-info-edit-icon"></button>
+      </form>
+    </div>
+  </div>
+  <div class="player-info-item" ftdropdown>
+    <div class="player-info-item-main dropdown">
+      <i class="fas fa-clinic-medical player-info-icon dropdown" ></i> Оперативные вмешательства
+      <i
+        class="fas fa-caret-down player-info-item-icon open dropdown"></i>
+      <i
+        class="fas fa-caret-down player-info-item-icon close"></i>
+    </div>
+
+    <div class="player-info-item-open-content">
+      <div class="player-info-table" *ngFor="let surgery of surgeriesList">
+        <div class="player-info-table-cell small">
+          {{surgery.procedureDate | date: 'dd.MM.yyyy'}}
+        </div>
+        <div class="player-info-table-cell big">
+          {{surgery.interventionType}}
+          <p>Диагноз: {{surgery.diagnosis}}</p>
+        </div>
+        <i class="fas fa-trash-alt player-info-edit-icon delete" *ngIf="editModeService.editMode"
+           (click)="deleteSurgery($event)"
+           [id]="surgery.id"
+        ></i>
+      </div>
+
+      <form class="player-info-table edit-mode"
+            *ngIf="editModeService.editMode" [formGroup]="surgeryForm" (ngSubmit)="onSurgerySubmit()">
+        <div class="player-info-table-edit small">
+          <input
+            formControlName="surgeryDate"
+            id="surgeryDate"
+            autocomplete="off"
+            min="1920-03-10T22:09:44.000Z"
+            max="2030-03-10T22:09:44.000Z"
+          />
+        </div>
+        <div class="player-info-table-edit small">
+          <input
+            formControlName="surgeryInfo"
+            id="surgeryInfo"
+            autocomplete="off"
+            placeholder="Тип операции"
+          />
+          <input
+            formControlName="surgeryDiagnosis"
+            id="surgeryDiagnosis"
+            autocomplete="off"
+            placeholder="Диагноз"
+          />
+        </div>
+        <button type="submit" class="fas fa-check player-info-edit-icon"></button>
+      </form>
+    </div>
+  </div>
+
+</form>
+
+

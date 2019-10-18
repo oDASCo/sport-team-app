@@ -8,19 +8,23 @@ import {IllnessesComponent} from "./main/content/illnesses/illnesses.component";
 import {TestsComponent} from "./main/content/tests/tests.component";
 import {MainComponent} from "./main/main.component";
 import {AddPatientComponent} from "./main/add-patient/add-patient.component";
+import {EmptyComponentComponent} from "./main/empty-component/empty-component.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {
     path: 'main', component: MainComponent, children: [
-      {path: 'patient/:id', component: ContentComponent, children: [
+      {
+        path: 'patient/:id', component: ContentComponent, children: [
           {path: 'info', component: InfoComponent},
           {path: 'medical-examinations', component: MedExamComponent},
           {path: 'illnesses', component: IllnessesComponent},
           {path: 'tests', component: TestsComponent}
-        ]},
-      {path: 'add-patient', component: AddPatientComponent}
+        ]
+      },
+      {path: 'add-patient', component: AddPatientComponent},
+      {path: 'empty', component: EmptyComponentComponent}
     ]
   }
 ];
