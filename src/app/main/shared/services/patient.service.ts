@@ -50,4 +50,27 @@ export class PatientService {
   public editPatientById(patient): Observable<any> {
     return this.http.put(`backend/api/${environment.api.patient.url}`, patient);
   }
+
+  public editGeneralInfo(info): Observable<any> {
+    return this.http.put(`backend/api/${environment.api.generalInfo.url}`, info);
+  }
+
+  public addFluorograpty(data): Observable<any> {
+    return this.http.post(`backend/api/${environment.api.fluorography.url}`, data);
+  }
+  public addVaccination(data): Observable<any> {
+    return this.http.post(`backend/api/${environment.api.vaccinationstatus.url}`, data);
+  }
+  public addSurgery(data): Observable<any> {
+    return this.http.post(`backend/api/${environment.api.surgicalintervention.url}`, data);
+  }
+  public deleteFluorograpty(id): Observable<any> {
+    return this.http.delete(`backend/api/${environment.api.fluorography.url}/${id}`);
+  }
+  public deleteVaccination(id): Observable<any> {
+    return this.http.delete(`backend/api/${environment.api.vaccinationstatus.url}/${id}`);
+  }
+  public deleteSurgery(id): Observable<any> {
+    return this.http.delete(`backend/api/${environment.api.surgicalintervention.url}/${id}`);
+  }
 }

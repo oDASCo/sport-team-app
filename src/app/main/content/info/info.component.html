@@ -18,7 +18,7 @@
     <button class="player-card-edit save"
             *ngIf="editModeService.editMode"
             type="submit"
-            (click)="offEditMode()"
+            (click)="onSubmit()"
     >
       Сохранить
     </button>
@@ -113,13 +113,14 @@
         <div class="player-info-table-cell big">
           {{flurography.info}}
         </div>
-        <i class="fas fa-trash-alt player-info-edit-icon delete" [id]="flurography.id"
+        <i class="fas fa-trash-alt player-info-edit-icon delete"
            *ngIf="editModeService.editMode"
-           (click)="deleteFlurography($event)"
+           (click)="deleteFlurography(flurography.id)"
         ></i>
       </div>
 
-      <form class="player-info-table edit-mode" *ngIf="editModeService.editMode" [formGroup]="flurographyForm" (ngSubmit)="onFlurographySubmit()">
+      <form class="player-info-table edit-mode" *ngIf="editModeService.editMode"
+            [formGroup]="flurographyForm" (ngSubmit)="onFlurographySubmit()">
         <div class="player-info-table-edit small">
           <input
             formControlName="flurographyDate"
@@ -160,7 +161,7 @@
         </div>
         <i class="fas fa-trash-alt player-info-edit-icon delete"
            *ngIf="editModeService.editMode"
-           (click)="deleteVaccination($event)"
+           (click)="deleteVaccination(vaccination.id)"
            [id]="vaccination.id"
         ></i>
       </div>
@@ -206,8 +207,7 @@
           <p>Диагноз: {{surgery.diagnosis}}</p>
         </div>
         <i class="fas fa-trash-alt player-info-edit-icon delete" *ngIf="editModeService.editMode"
-           (click)="deleteSurgery($event)"
-           [id]="surgery.id"
+           (click)="deleteSurgery(surgery.id)"
         ></i>
       </div>
 

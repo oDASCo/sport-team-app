@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EditModeService} from "../../shared/services/editMode.service";
 import {ModalService} from "../../shared/services/modal.service";
 import {PatientService} from "../../shared/services/patient.service";
+import {subscribeOn} from "rxjs/operators";
 
 @Component({
   selector: 'app-info',
@@ -57,19 +58,14 @@ export class InfoComponent implements OnInit {
       });
       this.patientService.getFluorograpthy(this.playerGeneralInfoId).subscribe(data => {
         this.flurographiesList = data;
-        console.log(data);
       });
       this.patientService.getVaccination(this.playerGeneralInfoId).subscribe(data => {
         this.vaccinationsList = data;
-        console.log(data);
       });
       this.patientService.getSurgery(this.playerGeneralInfoId).subscribe(data => {
         this.surgeriesList = data;
-        console.log(data);
       });
     });
-
-
   }
 
   private formGroup() {
@@ -103,34 +99,109 @@ export class InfoComponent implements OnInit {
     this.editModeService.offEditMode();
   }
 
-  deleteFlurography(event) {
-
+  public deleteFlurography(id) {
+    let flurographiesList = new Set(this.flurographiesList);
+    flurographiesList.forEach((item:any) => {
+      if (item.id === id) {
+        flurographiesList.delete(item)
+      }
+    });
+    this.flurographiesList = Array.from(flurographiesList);
+    this.patientService.deleteFluorograpty(id).subscribe(item => {});
   }
 
-  deleteVaccination(event) {
-
+  public deleteVaccination(id) {
+    let vaccinationsList = new Set(this.vaccinationsList);
+    vaccinationsList.forEach((item:any) => {
+      if (item.id === id) {
+        vaccinationsList.delete(item)
+      }
+    });
+    this.vaccinationsList = Array.from(vaccinationsList);
+    this.patientService.deleteVaccination(id).subscribe(item => {});
   }
 
-  deleteSurgery(event) {
+  public deleteSurgery(id) {
+    let surgeriesList = new Set(this.surgeriesList);
+    surgeriesList.forEach((item: any) => {
+        if (item.id === id) {
+          surgeriesList.delete(item)
+        }
 
+    });
+    this.surgeriesList = Array.from(surgeriesList);
+    this.patientService.deleteSurgery(id).subscribe(item => {});
   }
 
-  onSubmit() {
-
+  public onSubmit() {
+    let generalInfo = {
+      id: this.playerGeneralInfoId,
+      date: this.form.value.date,
+      weight: this.form.value.weight,
+      height: this.form.value.height,
+      arterialPressure: this.form.value.arterialPressure,
+      bloodType: this.form.value.bloodType,
+      flurographiesList: this.flurographiesList,
+      vaccinationsList: this.vaccinationsList,
+      surgeriesList: this.surgeriesList
+    };
+    this.patientService.editGeneralInfo(generalInfo).subscribe(data => {
+      this.offEditMode();
+    });
   }
 
-  onFlurographySubmit() {
-
-
+  public onFlurographySubmit() {
+    let flurography = {
+      procedureDate: this.flurographyForm.value.flurographyDate,
+      info: this.flurographyForm.value.flurographyInfo,
+      GeneralInfo_id: this.playerGeneralInfoId,
+      id: +Date.now().toString().split('').slice(6).join('')
+    };
+    this.flurographiesList.push({
+      procedureDate: this.flurographyForm.value.flurographyDate,
+      info: this.flurographyForm.value.flurographyInfo,
+      GeneralInfo_id: this.playerGeneralInfoId,
+      id: flurography.id
+    });
+    this.patientService.addFluorograpty(flurography).subscribe(item => {});
+    this.flurographyForm.reset();
   }
 
-  onVaccinationSubmit() {
+  public onVaccinationSubmit() {
 
+    let vaccination = {
+      procedureDate: this.vaccinationForm.value.vaccinationDate,
+      info: this.vaccinationForm.value.vaccinationInfo,
+      GeneralInfo_id: this.playerGeneralInfoId,
+      id: +Date.now().toString().split('').slice(6).join('')
+    };
+    this.vaccinationsList.push({
+      procedureDate: this.vaccinationForm.value.vaccinationDate,
+      info: this.vaccinationForm.value.vaccinationInfo,
+      GeneralInfo_id: this.playerGeneralInfoId,
+      id: vaccination.id
+    });
+    this.patientService.addVaccination(vaccination).subscribe(item => {});
+    this.vaccinationForm.reset();
   }
 
 
-  onSurgerySubmit() {
+  public onSurgerySubmit() {
+    let surgery = {
+      procedureDate: this.surgeryForm.value.surgeryDate,
+      interventionType: this.surgeryForm.value.surgeryInfo,
+      diagnosis: this.surgeryForm.value.surgeryDiagnosis,
+      GeneralInfo_id: this.playerGeneralInfoId,
+      id: +Date.now().toString().split('').slice(6).join('')
+    };
+    this.surgeriesList.push({
+      procedureDate: this.surgeryForm.value.surgeryDate,
+      interventionType: this.surgeryForm.value.surgeryInfo,
+      diagnosis: this.surgeryForm.value.surgeryDiagnosis,
+      GeneralInfo_id: this.playerGeneralInfoId,
+      id: surgery.id
+    });
+    this.patientService.addSurgery(surgery).subscribe(item => {});
+    this.surgeryForm.reset();
   }
-
-
 }

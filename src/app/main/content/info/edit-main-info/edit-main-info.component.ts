@@ -78,7 +78,6 @@ export class EditMainInfoComponent implements OnInit {
 
 
   onSubmit() {
-
     const {newFirstName, newLastName} = this.form.value;
     let input = new FormData();
 
