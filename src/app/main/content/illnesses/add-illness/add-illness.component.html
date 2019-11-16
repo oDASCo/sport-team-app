@@ -1,0 +1,123 @@
+<form class="player-bodycheck-content" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngIf="!isIllnessesAdded" style="position: relative">
+    <h3>Новая травма/заболевание</h3>
+    <div class="player-bodycheck-info-list">
+      <div class="bodycheck-list-item-list">
+        <div class="player-bodycheck-info">
+          <p class="player-bodycheck-info-text">Дата травмы/заболевания:
+            <input class="player-bodycheck-input"
+                   type="date"
+                   formControlName="illnessStartDate"
+                   autocomplete="off"
+                   id="illnessStartDate"
+            />
+            <span
+              class="form-help-text"
+              *ngIf="(form.get('illnessStartDate').invalid && form.get('illnessStartDate').touched)"
+            >
+       Пожалуйста, выберите дату
+     </span>
+
+          </p>
+          <p class="player-bodycheck-info-text">Дата выхода в основную группу:
+            <input class="player-bodycheck-input"
+                   type="date"
+                   formControlName="illnessEndDate"
+                   autocomplete="off"
+                   id="illnessEndDate"
+            />
+            <span
+              class="form-help-text"
+              *ngIf="(form.get('illnessEndDate').invalid && form.get('illnessEndDate').touched)"
+            >
+       Пожалуйста, выберите дату
+     </span>
+          </p>
+        </div>
+
+        <div class="bodycheck-list-card">
+          <p class="bodycheck-list-card-head">Диагноз</p>
+          <textarea
+            formControlName="diagnosis"
+            autocomplete="off"
+            id="diagnosis"
+          ></textarea>
+        </div>
+
+      </div>
+    </div>
+    <div class="player-bodycheck-info-list">
+      <div class="player-bodycheck-list-item">
+        <p class="player-bodycheck-list-item-title">Дополнительные лабораторные и инструментальные исследования:</p>
+        <div class="bodycheck-list-item-list">
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">МРТ</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Загрузить фото <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeMrt($event)" #mrt/>
+                <img id="mrt" [src]="imageSrcMrt || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">УЗИ</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Загрузить фото <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeUzi($event)" #uzi/>
+                <img id="uzi" [src]="imageSrcUzi || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">Рентгенография</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Загрузить фото <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeRentgen($event)" #rentgen/>
+                <img id="rentgen" [src]="imageSrcRentgen || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="player-bodycheck-info-list">
+      <div class="player-bodycheck-list-item">
+        <p class="player-bodycheck-list-item-title">Лечение:</p>
+        <div class="bodycheck-list-item-list">
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">лекарственная терапия</p>
+            <textarea
+              formControlName="drugTherapy"
+              autocomplete="off"
+              id="drugTherapy"
+            ></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">ФТЛ</p>
+            <textarea  formControlName="physiotherapyTreatment"
+                       autocomplete="off"
+                       id="physiotherapyTreatment"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">прочее</p>
+            <textarea  formControlName="other"
+                       autocomplete="off"
+                       id="other"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button  *ngIf="!isIllnessesAdded" type="submit" class="player-bodycheck-content-save"
+            [disabled]="form.invalid"
+    >Добавить</button>
+  </div>
+
+
+  <span *ngIf="isIllnessesAdded" class="form-result">Травма\заболевание добавлено</span>
+</form>

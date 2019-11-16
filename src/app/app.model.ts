@@ -14,7 +14,13 @@ export interface AppModel {
     },
     vaccinationstatus : {
       url: string;
-    }
+    },
+    medicalExamination: {
+      url: string;
+    },
+    injuriesDiseases: {
+      url: string;
+    },
   };
   production: boolean;
 }

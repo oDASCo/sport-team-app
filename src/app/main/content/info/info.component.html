@@ -1,4 +1,4 @@
-<app-modal [playerId]="playerId" [modalType]="modalService.modalType"></app-modal>
+<app-modal [patientId]="playerId" [modalType]="modalService.modalType"></app-modal>
 <form class="player-info-list" [formGroup]="form" (ngSubmit)="onSubmit()">
 
   <div class="edit-controls">
@@ -35,6 +35,7 @@
              formControlName="date"
              autocomplete="off"
              id="date"
+             type="date"
       />
 
     </div>
@@ -126,8 +127,7 @@
             formControlName="flurographyDate"
             id="flurographyDate"
             autocomplete="off"
-            min="1920-03-10T22:09:44.000Z"
-            max="2030-03-10T22:09:44.000Z"
+            type="date"
           />
         </div>
         <div class="player-info-table-edit big">
@@ -172,8 +172,7 @@
             formControlName="vaccinationDate"
             id="vaccinationDate"
             autocomplete="off"
-            min="1920-03-10T22:09:44.000Z"
-            max="2030-03-10T22:09:44.000Z"
+            type="date"
           />
         </div>
         <div class="player-info-table-edit big">
@@ -218,8 +217,7 @@
             formControlName="surgeryDate"
             id="surgeryDate"
             autocomplete="off"
-            min="1920-03-10T22:09:44.000Z"
-            max="2030-03-10T22:09:44.000Z"
+            type="date"
           />
         </div>
         <div class="player-info-table-edit small">

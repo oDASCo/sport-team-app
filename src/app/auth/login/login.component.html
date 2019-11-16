@@ -1,4 +1,57 @@
-<p>
-  login works!
-  <button [routerLink]="['/main/', 'empty']">login</button>
-</p>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-content">
+      <div class="login-container">
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="login-form-field">
+            <input
+              type="text"
+              class="login-form-input"
+              placeholder="E-mail"
+              formControlName="email"
+              autocomplete="off"
+              id="email"
+            >
+            <span
+              class="form-help-text"
+              *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+            >
+      <span *ngIf="loginForm.get('email')['errors']['required']">Email не может быть пустым. </span>
+      <span *ngIf="loginForm.get('email')['errors']['email']">Введите корректный email. </span>
+    </span>
+          </div>
+          <div class="login-form-field">
+            <input
+              type="password"
+              class="login-form-input"
+              placeholder="Пароль"
+              formControlName="password"
+              autocomplete="off"
+              id="password"
+            >
+            <span
+              class="form-help-text"
+              *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
+            >
+      <span *ngIf="loginForm.get('password')['errors']['required']">Пароль не может быть пустым. </span>
+      <span
+        *ngIf="loginForm.get('password')['errors']['minlength'] && loginForm.get('password')['errors']['minlength']['requiredLength']">
+        Пароль должен быть больше
+        {{ loginForm.get('password')['errors']['minlength']['requiredLength'] }}
+        символов. Сейчас {{ loginForm.get('password')['errors']['minlength']['actualLength'] }}.
+      </span>
+    </span>
+          </div>
+          <button type="submit" class="login-form-btn form-btn">Войти</button>
+          <span class="form-help-text" *ngIf="showMsg">
+      Неверный логин и/или пароль.
+    </span>
+        </form>
+        <div class="auth-tip">
+          <a [routerLink]="'/registration'">Зарегистрироваться</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

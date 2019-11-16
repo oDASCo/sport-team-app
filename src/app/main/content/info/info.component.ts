@@ -36,18 +36,36 @@ export class InfoComponent implements OnInit {
     this.formGroup();
     this.route.parent.params.subscribe((params: Params) => {
       this.playerId = params['id'];
+      this.getGeneralInfo();
     });
+    // this.getGeneralInfo();
+  }
+
+  private getGeneralInfo() {
     this.patientService.getGeneralInfo(this.playerId).subscribe(data => {
-      this.playerGeneralInfo =
-        {
-          id: data.id,
-          patientId: data.patientId,
-          birthday: data.birthday,
-          weight: data.weight,
-          height: data.height,
-          arterialPressure: data.arterialPressure,
-          bloodType: data.bloodType
-        };
+      if (!data) {
+        this.playerGeneralInfo =
+          {
+            id: +Date.now().toString().split('').slice(6).join(''),
+            patientId: this.playerId,
+            birthday: null,
+            weight: null,
+            height: null,
+            arterialPressure: null,
+            bloodType: null
+          };
+      } else {
+        this.playerGeneralInfo =
+          {
+            id: data.id,
+            patientId: data.patientId,
+            birthday: data.birthday,
+            weight: data.weight,
+            height: data.height,
+            arterialPressure: data.arterialPressure,
+            bloodType: data.bloodType
+          };
+      }
       this.playerGeneralInfoId = this.playerGeneralInfo.id;
       this.form.patchValue({
         date: data.birthday,
@@ -136,7 +154,7 @@ export class InfoComponent implements OnInit {
   public onSubmit() {
     let generalInfo = {
       id: this.playerGeneralInfoId,
-      date: this.form.value.date,
+      date: this.form.value.date.split('T')[0],
       weight: this.form.value.weight,
       height: this.form.value.height,
       arterialPressure: this.form.value.arterialPressure,
@@ -145,7 +163,10 @@ export class InfoComponent implements OnInit {
       vaccinationsList: this.vaccinationsList,
       surgeriesList: this.surgeriesList
     };
+    console.log(this.form.value.date);
+    console.log(generalInfo);
     this.patientService.editGeneralInfo(generalInfo).subscribe(data => {
+      this.getGeneralInfo();
       this.offEditMode();
     });
   }
@@ -168,7 +189,6 @@ export class InfoComponent implements OnInit {
   }
 
   public onVaccinationSubmit() {
-
     let vaccination = {
       procedureDate: this.vaccinationForm.value.vaccinationDate,
       info: this.vaccinationForm.value.vaccinationInfo,

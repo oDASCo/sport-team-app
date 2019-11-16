@@ -19,6 +19,10 @@ import {ModalService} from "./shared/services/modal.service";
 import { EmptyComponentComponent } from './empty-component/empty-component.component';
 import {SharedModule} from "../shared/shared.module";
 import { EditMainInfoComponent } from './content/info/edit-main-info/edit-main-info.component';
+import {MedicalExamService} from "./shared/services/medicalExam.service";
+import { AddMedExamComponent } from './content/med-exam/add-med-exam/add-med-exam.component';
+import {InjuriesService} from "./shared/services/injuries.service";
+import { AddIllnessComponent } from './content/illnesses/add-illness/add-illness.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { EditMainInfoComponent } from './content/info/edit-main-info/edit-main-i
     AddPatientComponent,
     ModalComponent,
     EmptyComponentComponent,
-    EditMainInfoComponent
+    EditMainInfoComponent,
+    AddMedExamComponent,
+    AddIllnessComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,10 @@ import { EditMainInfoComponent } from './content/info/edit-main-info/edit-main-i
   providers: [
     PatientService,
     EditModeService,
-    ModalService]
+    ModalService,
+    MedicalExamService,
+    InjuriesService
+  ]
 })
 export class MainModule {
 }

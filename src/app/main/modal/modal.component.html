@@ -1,29 +1,16 @@
 <div class="modal-container" *ngIf="modalType">
   <div class="modal-window">
     <!--    <FT-app-edit-bodycheck *ngIf="modalService.modalType === 'editBodycheck'"></FT-app-edit-bodycheck>-->
-    <!--    <FT-app-add-bodycheck-->
-    <!--      (OnBodycheckAdd)="newBodycheckAdded($event)"-->
-    <!--      *ngIf="modalService.modalType === 'addBodycheck'"></FT-app-add-bodycheck>-->
-    <!--    <FT-app-edit-main-info *ngIf="modalService.modalType === 'editMainInfo'"></FT-app-edit-main-info>-->
+    <app-add-med-exam (OnMedExamAdd)="newMedExamAdded($event)"
+                      *ngIf="modalService.modalType === 'addMedExam'"
+                      [patientId]="patientId"
+    ></app-add-med-exam>
     <app-edit-main-info *ngIf="modalService.modalType === 'editMainInfo'"></app-edit-main-info>
-    <!--    <FT-app-add-illness *ngIf="modalService.modalType === 'addIllness'"></FT-app-add-illness>-->
+    <app-add-illness *ngIf="modalService.modalType === 'addIllness'"
+                     [patientId]="patientId"
+                     (OnIllnessAdded)="newIllnessAdded($event)"
+    ></app-add-illness>
     <!--    <FT-app-edit-illness *ngIf="modalService.modalType === 'editIllness'"></FT-app-edit-illness>-->
-
-
-    <!--    <div class="modal-delete" *ngIf="modalService.modalType === 'deleteBodycheck'">-->
-    <!--      <p *ngIf="!showTip">Вы уверены, что хотите удалить медосмотр?</p>-->
-    <!--      <button *ngIf="!showTip" class="player-bodycheck-content-delete"-->
-    <!--              (click)="deleteBodycheck()"-->
-    <!--      >Удалить</button>-->
-    <!--      <span *ngIf="showTip" class="form-result">Медосмотр № {{modalService.playerId}} удален</span>-->
-    <!--    </div>-->
-    <!--    <div class="modal-delete" *ngIf="modalService.modalType === 'deleteIllness'" >-->
-    <!--      <p *ngIf="!showTip">Вы уверены, что хотите удалить травму/заболевание?</p>-->
-    <!--      <button *ngIf="!showTip" class="player-bodycheck-content-delete"-->
-    <!--              (click)="deleteIllness()"-->
-    <!--      >Удалить</button>-->
-    <!--      <span *ngIf="showTip" class="form-result"> Травма/заболевание № {{modalService.playerId}} удалено</span>-->
-    <!--    </div>-->
     <div class="modal-delete" *ngIf="modalType === 'deletePatient'">
       <div *ngIf="!showTip" class="modal-delete">
         <p>Вы уверены, что хотите удалить пациента и всю информацию о нем?</p>
@@ -33,7 +20,29 @@
         </button>
       </div>
 
-      <span *ngIf="showTip" class="form-result">Игрок № {{playerId}} удален</span>
+      <span *ngIf="showTip" class="form-result">Игрок № {{patientId}} удален</span>
+    </div>
+    <div class="modal-delete" *ngIf="modalType === 'deleteMedExam'">
+      <div *ngIf="!showTip" class="modal-delete">
+        <p>Вы уверены, что хотите удалить медосмотр и всю информацию о нем?</p>
+        <button class="player-bodycheck-content-delete"
+                (click)="deleteMedExam()"
+        >Удалить
+        </button>
+      </div>
+
+      <span *ngIf="showTip" class="form-result">Медосмотр № {{modalService.medicalExamId}} удален</span>
+    </div>
+    <div class="modal-delete" *ngIf="modalType === 'deleteIllness'">
+      <div *ngIf="!showTip" class="modal-delete">
+        <p>Вы уверены, что хотите удалить заболевание и всю информацию о нем?</p>
+        <button class="player-bodycheck-content-delete"
+                (click)="deleteIllness()"
+        >Удалить
+        </button>
+      </div>
+
+      <span *ngIf="showTip" class="form-result">Заболевание № {{modalService.illnessId}} удалено</span>
     </div>
     <div (click)="closeModal()" class="modal-close"><i class="fas fa-times"></i></div>
   </div>

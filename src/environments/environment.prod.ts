@@ -14,8 +14,14 @@ export const environment: AppModel = {
     surgicalintervention: {
       url: 'surgicalintervention'
     },
-    vaccinationstatus : {
+    vaccinationstatus: {
       url: 'vaccinationstatus'
+    },
+    medicalExamination: {
+      url: 'medicalExamination'
+    },
+    injuriesDiseases: {
+      url: 'injuriesDiseases'
     }
   },
   production: true

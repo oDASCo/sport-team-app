@@ -4,6 +4,8 @@ import {NgModule} from '@angular/core';
 import {LoginComponent} from "./login/login.component";
 import {AuthComponent} from "./auth.component";
 import {AppRoutingModule} from "../app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -12,7 +14,10 @@ import {AppRoutingModule} from "../app-routing.module";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: []
 })

@@ -42,3 +42,28 @@ app-sidebar {
   width: 77%;
   display: flex;
 }
+
+.add-btn {
+  border-radius: 5px;
+  background-color: #77b2d9;
+  color: white;
+  padding: 9px 15px;
+  text-transform: uppercase;
+  border: 1px solid #77b2d9;
+  margin-right: 20px;
+  font-size: 10px;
+  transition: 0.2s ease-in-out;
+  box-shadow: 1px 1px 7px #c5d4e3;
+  &:hover{
+    background-color: #5d93ba;
+    transition: 0.2s ease-in-out;
+  }
+}
+.form-result {
+  background-color: #bfedd9;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  text-align: center;
+}

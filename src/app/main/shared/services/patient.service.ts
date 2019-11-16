@@ -52,7 +52,8 @@ export class PatientService {
   }
 
   public editGeneralInfo(info): Observable<any> {
-    return this.http.put(`backend/api/${environment.api.generalInfo.url}`, info);
+    return this.http.put(`backend/api/${environment.api.generalInfo.url}`, info,
+      {responseType: 'text'});
   }
 
   public addFluorograpty(data): Observable<any> {

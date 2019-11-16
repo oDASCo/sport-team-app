@@ -1,0 +1,149 @@
+<form class="player-bodycheck-content" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngIf="!isBodycheckAdded" id="player-bodycheck-wrapper">
+    <h3>Новый медосмотр</h3>
+    <div class="player-bodycheck-content-main-info">
+      <div class="bodycheck-list-card">
+        <p class="bodycheck-list-card-head">Дата медосмотра*</p>
+        <input
+               formControlName="procedureTime"
+               autocomplete="off"
+               id="procedureTime"
+               type="date"
+        >
+      </div>
+      <div class="bodycheck-list-card">
+        <p class="bodycheck-list-card-head">Допуск</p>
+        <label class="container">Допущен к соревнованиям (здоров)
+          <input type="checkbox" checked="checked" formControlName="medAllow">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    <div class="player-bodycheck-info-list">
+      <div class="player-bodycheck-list-item">
+        <p class="player-bodycheck-list-item-title">Специалисты:</p>
+        <div class="bodycheck-list-item-list">
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">офтальмолог</p>
+            <textarea formControlName="oculist"
+                      autocomplete="off"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">невролог</p>
+            <textarea formControlName="neurologist"
+                      autocomplete="off"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">лор</p>
+            <textarea formControlName="otolaryngologist"
+                      autocomplete="off"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">хирург</p>
+
+            <textarea formControlName="surgeon"
+                      autocomplete="off"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">стоматолог</p>
+
+            <textarea formControlName="dentist"
+                      autocomplete="off"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">эндокринолог</p>
+            <textarea formControlName="endocrinologist"
+                      autocomplete="off"></textarea>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">спортивный врач</p>
+            <textarea formControlName="sportsDoctor"
+                      autocomplete="off"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="player-bodycheck-info-list">
+      <div class="player-bodycheck-list-item">
+        <p class="player-bodycheck-list-item-title">Лабораторные исследования</p>
+        <div class="bodycheck-list-item-list">
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">БАК</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Добавить файлы <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeBak($event)" #bak/>
+                <img id="bak" [src]="imageSrcBak || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">ОАК</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Добавить файлы <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeOak($event)" #oak/>
+                <img id="oak" [src]="imageSrcOak || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">ОАМ</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Добавить файлы <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeOam($event)" #oam/>
+                <img id="oam" [src]="imageSrcOam || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="player-bodycheck-info-list">
+      <div class="player-bodycheck-list-item">
+
+        <p class="player-bodycheck-list-item-title">Инструментальные исследования</p>
+        <div class="bodycheck-list-item-list">
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">ЭКГ</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Добавить файлы <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeEkg($event)" #ekg/>
+                <img id="ekg" [src]="imageSrcEkg || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+          <div class="bodycheck-list-card">
+            <p class="bodycheck-list-card-head">УЗИ сердца</p>
+            <div class="upload-btn-wrapper">
+              <button class="upload-btn">Добавить файлы <i class="far fa-images"></i></button>
+              <div>
+                <input type="file" (change)="onFileChangeUzi($event)" #uzi/>
+                <img id="uzi" [src]="imageSrcUzi || 'http://placehold.it/180'" alt="your image" />
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button *ngIf="!isBodycheckAdded" type="submit" class="player-bodycheck-content-save" [ngClass]="{'disabled': form.invalid}" [disabled]="form.invalid">Добавить</button>
+    <span
+      class="form-help-text"
+      *ngIf="(form.get('procedureTime').invalid)"
+    >
+       Пожалуйста, выберите дату медосмотра
+     </span>
+
+  </div>
+  <span *ngIf="isBodycheckAdded" class="form-result">Медосмотр добавлен</span>
+
+</form>
+
