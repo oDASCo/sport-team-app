@@ -37,6 +37,9 @@ export class ModalComponent implements OnInit {
     this.patientService.deletePatientById(this.patientId).subscribe((data) => {
     });
     this.closeModal();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
     this.router.navigate(['/main/empty']);
   }
 
